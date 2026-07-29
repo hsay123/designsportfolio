@@ -1,0 +1,605 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+  html, html * { cursor: none !important; }
+}
+
+body {
+  background-color: #FAF8F5;
+  color: #1C1917;
+  background-image:
+    linear-gradient(rgba(200, 180, 150, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 180, 150, 0.25) 1px, transparent 1px);
+  background-size: 56px 56px;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.1;
+  background-image: url("/noise-texture.png");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+::selection {
+  background-color: #1C1917;
+  color: #FFFFFF;
+}
+
+/* Social morph — text dissolves into icon */
+.social-morph {
+  position: relative;
+  padding: 4px 8px;
+  overflow: hidden;
+}
+
+.social-morph-text {
+  display: inline-block;
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-morph-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(0.6);
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+              filter 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.social-morph:hover .social-morph-text {
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(0.6);
+}
+
+.social-morph:hover .social-morph-icon {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+}
+
+/* Plant bounce on hover — smooth continuous */
+@keyframes plant-bounce {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+.plant-hover {
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.plant-hover:hover {
+  animation: plant-bounce 1.2s ease-in-out infinite;
+}
+
+/* Cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Pencil doodle draw */
+@keyframes pencil-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pencil-write {
+  0% { transform: translateX(0px) rotate(0deg); }
+  10% { transform: translateX(7px) rotate(1deg); }
+  20% { transform: translateX(15px) rotate(-1deg); }
+  30% { transform: translateX(22px) rotate(1deg); }
+  40% { transform: translateX(30px) rotate(-1deg); }
+  50% { transform: translateX(37px) rotate(1deg); }
+  60% { transform: translateX(45px) rotate(-1deg); }
+  70% { transform: translateX(52px) rotate(1deg); }
+  80% { transform: translateX(60px) rotate(-1deg); }
+  90% { transform: translateX(67px) rotate(1deg); }
+  100% { transform: translateX(75px) rotate(-1deg); }
+}
+
+@keyframes pencil-line-reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  10% { clip-path: inset(0 90% 0 0); }
+  20% { clip-path: inset(0 80% 0 0); }
+  30% { clip-path: inset(0 70% 0 0); }
+  40% { clip-path: inset(0 60% 0 0); }
+  50% { clip-path: inset(0 50% 0 0); }
+  60% { clip-path: inset(0 40% 0 0); }
+  70% { clip-path: inset(0 30% 0 0); }
+  80% { clip-path: inset(0 20% 0 0); }
+  90% { clip-path: inset(0 10% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+
+.pencil-line {
+  clip-path: inset(0 100% 0 0);
+}
+
+.group\/pencil:hover .pencil-line {
+  animation: pencil-line-reveal 1s linear forwards;
+}
+
+.group\/pencil:hover .pencil-img {
+  animation: pencil-write 1s linear forwards;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+/* Hero entrance animations — use individual transform properties to avoid conflicting with Tailwind's transform */
+@keyframes hero-fade-in {
+  from { opacity: 0; translate: 0 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes hero-slide-left {
+  from { opacity: 0; translate: -40px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes hero-slide-right {
+  from { opacity: 0; translate: 40px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes hero-slide-up {
+  from { opacity: 0; translate: 0 30px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes hero-pop {
+  from { opacity: 0; scale: 0.85; }
+  to { opacity: 1; scale: 1; }
+}
+
+@keyframes flower-grow {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes flower-merge {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+  55% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes bloom-sway {
+  0%   { transform: translateY(0) rotate(-1.5deg); }
+  50%  { transform: translateY(-4px) rotate(1.5deg); }
+  100% { transform: translateY(0) rotate(-1.5deg); }
+}
+
+@keyframes garland-sway {
+  0%   { transform: rotate(-0.7deg) translateX(-2px); }
+  50%  { transform: rotate(0.7deg) translateX(2px); }
+  100% { transform: rotate(-0.7deg) translateX(-2px); }
+}
+
+@keyframes hero-blur-in {
+  from { opacity: 0; filter: blur(12px); scale: 0.95; }
+  to { opacity: 1; filter: blur(0px); scale: 1; }
+}
+
+@keyframes hero-scale-up {
+  0% { opacity: 0; scale: 0.3; }
+  50% { opacity: 1; scale: 1.02; }
+  70% { scale: 0.99; }
+  100% { opacity: 1; scale: 1; }
+}
+
+@keyframes hero-glare {
+  0% { translate: -120% 0; opacity: 0; }
+  5% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { translate: 260% 0; opacity: 0; }
+}
+
+.hero-entrance {
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+/* Floating hover effect */
+@keyframes board-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+.board-float {
+  animation: board-float 4s ease-in-out infinite;
+  will-change: translate;
+}
+
+/* Scroll-triggered fade in */
+@keyframes scroll-fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-fade-in {
+  animation: scroll-fade-up ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+/* Scroll-triggered slide from left */
+@keyframes scroll-slide-left {
+  from { opacity: 0; transform: translateX(-60px) rotate(-15deg); }
+  to { opacity: 1; transform: translateX(0) rotate(-15deg); }
+}
+
+.scroll-slide-in-left {
+  animation: scroll-slide-left 0.8s ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+/* Scroll-triggered slide from right */
+@keyframes scroll-slide-right {
+  from { opacity: 0; transform: translateX(60px) rotate(10deg); }
+  to { opacity: 1; transform: translateX(0) rotate(10deg); }
+}
+
+.scroll-slide-in-right {
+  animation: scroll-slide-right 0.8s ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Dot matrix LEDs */
+.dot-led {
+  background: radial-gradient(circle at 40% 35%, #3a3a3a, #2a2a2a 60%, #222 100%);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6), 0 0.5px 0 rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(80,80,80,0.5);
+}
+
+.dot-on {
+  background: radial-gradient(circle at 40% 35%, #fff, #ffffffcc 50%, #ffffff88 100%);
+  box-shadow: 0 0 4px #ffffffcc, 0 0 8px #ffffff99, 0 0 16px #ffffff66, 0 0 24px #ffffff33;
+  border: none;
+  transition: background 0ms, box-shadow 0ms;
+  transition-delay: 0ms;
+}
+
+.group\/matrix:hover .dot-on,
+.dot-matrix-active .dot-on {
+  background: radial-gradient(circle at 40% 35%, var(--dot-color), var(--dot-color) 50%, transparent 100%);
+  box-shadow: 0 0 4px var(--dot-color), 0 0 8px var(--dot-color), 0 0 16px var(--dot-color);
+  transition-duration: 0ms;
+  transition-delay: 0ms;
+}
+
+/* Coffee wobble */
+@keyframes coffee-wobble {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-5deg); }
+  30% { transform: rotate(4deg); }
+  45% { transform: rotate(-3deg); }
+  60% { transform: rotate(2deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.hover\:coffee-wobble:hover {
+  animation: coffee-wobble 0.6s ease-in-out;
+  transform-origin: bottom center;
+}
+
+/* Quote slide */
+@keyframes quote-slide-in {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.quote-slide-in {
+  animation: quote-slide-in 0.3s ease-out both;
+}
+
+/* Editor window */
+.editor-window {
+  background-color: #F5F5F4;
+  border: 1px solid #E7E5E4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+}
+
+/* Code panel hover glow */
+.code-panel {
+  transition: box-shadow 0.3s ease;
+}
+
+.code-panel:hover {
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
+}
+
+/* Code line hover */
+.code-line:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Floating code decorations */
+@keyframes code-float {
+  0%, 100% { transform: translateY(0) rotate(var(--rotate, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--rotate, 0deg)); }
+}
+
+.code-decoration {
+  animation: code-float 6s ease-in-out infinite;
+}
+
+/* Vinyl card animated blobs */
+@keyframes blob-drift-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(100px, 120px) scale(1.1); }
+  50% { transform: translate(80px, 200px) scale(0.95); }
+  75% { transform: translate(-10px, 100px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes blob-drift-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-80px, -120px) scale(1.05); }
+  50% { transform: translate(-100px, -200px) scale(1.1); }
+  75% { transform: translate(-20px, -80px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes blob-drift-3 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -80px) scale(1.1); }
+  50% { transform: translate(-70px, 40px) scale(0.95); }
+  75% { transform: translate(50px, 80px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.vinyl-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.8;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.vinyl-blob-1 {
+  width: 200px;
+  height: 200px;
+  background: #d4e8b0;
+  top: -50px;
+  left: -40px;
+  animation: blob-drift-1 8s ease-in-out infinite;
+}
+
+.vinyl-blob-2 {
+  width: 200px;
+  height: 200px;
+  background: #fef0a0;
+  bottom: -50px;
+  right: -40px;
+  animation: blob-drift-2 8s ease-in-out infinite;
+}
+
+.vinyl-blob-3 {
+  width: 180px;
+  height: 180px;
+  background: #b8ddb9;
+  top: 50%;
+  left: 50%;
+  margin-top: -90px;
+  margin-left: -90px;
+  animation: blob-drift-3 8s ease-in-out infinite;
+}
+
+/* Flower glitch on hover — smooth chromatic shimmer */
+@keyframes flower-glitch {
+  0%   { filter: none; }
+  25%  { filter: hue-rotate(15deg) brightness(1.05); }
+  50%  { filter: hue-rotate(-10deg) saturate(1.2); }
+  75%  { filter: hue-rotate(8deg) brightness(1.08); }
+  100% { filter: none; }
+}
+
+.group\/flower:hover .flower-glitch-target {
+  animation: flower-glitch 1.5s ease-in-out infinite;
+}
+
+/* Vinyl neon rotating gradient border */
+@keyframes vinyl-border-rotate {
+  from { --vinyl-angle: 0deg; }
+  to { --vinyl-angle: 360deg; }
+}
+
+@property --vinyl-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Vinyl spin */
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-spin {
+  animation: none;
+}
+.group\/vinyl:hover .vinyl-spin,
+.vinyl-spin-active {
+  animation: vinyl-spin 12s linear infinite;
+}
+
+/* Vinyl mini player progress */
+.vinyl-progress {
+  animation: vinyl-progress-grow 8s linear infinite;
+}
+@keyframes vinyl-progress-grow {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Name badge swing on hover */
+@keyframes badge-swing {
+  0% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+
+.badge-swing {
+  transform-origin: top center;
+  animation: badge-swing 3s ease-in-out infinite;
+}
+
+/* Badge drop and bounce */
+@keyframes badge-drop {
+  0% { transform: translateY(-100%); }
+  45% { transform: translateY(0); }
+  57% { transform: translateY(-16px); }
+  69% { transform: translateY(0); }
+  78% { transform: translateY(-6px); }
+  87% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.badge-drop {
+  animation: badge-drop 1.6s ease-in-out 6.5s both;
+}
+
+/* Scrollbar for tabs */
+.tabs-scroll::-webkit-scrollbar {
+  height: 0;
+}
+
+/* Page flip snap transition */
+.flip-snap {
+  transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.flip-leaf {
+  will-change: transform;
+}
+
+@keyframes burst-particle {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(var(--burst-x), var(--burst-y)) scale(1);
+  }
+  100% {
+    transform: translate(var(--burst-x), calc(var(--burst-y) - 20px)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Easter egg shimmer */
+@keyframes egg-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-\[egg-shimmer_3s_ease-in-out_infinite\] {
+  background: linear-gradient(120deg, transparent 30%, rgba(0,0,0,0.03) 48%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.03) 52%, transparent 70%);
+  background-size: 200% 100%;
+  animation: egg-shimmer 3s ease-in-out infinite;
+}
+
+/* Grid flip */
+@keyframes grid-flip-in {
+  0% { transform: rotateY(90deg); opacity: 0; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+/* Ticket scan shimmer */
+@keyframes ticket-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Easter egg grid cell */
+.egg-border {
+  border-color: #44403c;
+  transition: border-color 0.15s ease;
+}
+
+.group\/egg:hover .egg-border {
+  border-color: #1c1917;
+}
+
+/* Bell shake notification */
+@keyframes bell-shake {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-12deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-8deg); }
+  50% { transform: rotate(6deg); }
+  60% { transform: rotate(-4deg); }
+  70% { transform: rotate(2deg); }
+  80% { transform: rotate(0deg); }
+}
+
+.bell-shake {
+  transform-origin: top center;
+  animation: bell-shake 0.8s ease-in-out 0.6s 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
