@@ -96,7 +96,7 @@ export function RetroWindows() {
 
 export function StartMenu() {
   const menuItems = [
-    { icon: "📁", label: "Work", url: "https://yanliu.design/" },
+    { icon: "📁", label: "Work", url: "/https://yanliu.design/" },
     { icon: "📄", label: "Documents" },
     { icon: "⚙️", label: "Settings" },
     { icon: "🔍", label: "Find" },

@@ -9,7 +9,7 @@ export const siteConfig = {
     linkedin: "#",
     email: "yanliudesignlife@gmail.com",
     twitter: "#",
-    figma: "https://www.figma.com/@yanliu",
+    figma: "https://www.figma.com/@yashlandge",
     unsplash: "#",
     instagram: "#",
     red: "#",

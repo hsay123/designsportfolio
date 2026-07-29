@@ -47,18 +47,18 @@ const folderContent = [
   {
     title: "Community Impact",
     description: "My Figma Community files have **670K+** uses. I design and share to help designers speed up workflows, explore ideas, and build faster.\n\n100+ Abstract Shapes / Elements was a finalist for Favorite Graphic Resources in the 2022 Figma Community Awards. 50+ Abstract Geometric Shapes was featured in the Day 2 virtual broadcast at Config 2024.",
-    cta: { label: "Figma designs", url: "https://www.figma.com/@yanliu" },
+    cta: { label: "Figma designs", url: "https://www.figma.com/@yashlandge" },
   },
   {
     title: "Through My Lens",
     description: "Nature helps me step away from daily routines and reset my perspective.\n\nMy photography has reached **20M+ views** and **150K+ downloads**, and has been used across platforms including BuzzFeed, Notion, Trello, Mailchimp, Fever, and Figma.",
-    cta: { label: "Photos on Unsplash", url: "https://unsplash.com/@yanliudesign" },
+    cta: { label: "Photos on Unsplash", url: "https://unsplash.com/@yash213hw" },
   },
   {
     title: "From Sketch to Merch",
     description: "I create illustrations and black-and-white doodles as a way to unwind and explore visual ideas.\n\nIn 2022, I collaborated with **SHEIN X Artist** to launch my merchandise collection, YANLIU. I share my work on Instagram and RedNote, where my illustrations have reached **50K+** likes, as a space to experiment, explore, and stay curious.",
     cta: [
-      { label: "Instagram", url: "https://www.instagram.com/yanliudesign" },
+      { label: "Instagram", url: "https://www.instagram.com/__yash_l_10" },
       { label: "RedNote", url: "https://www.xiaohongshu.com/user/profile/5cf87836000000001803f1b3?xhsshare=CopyLink&appuid=5cf87836000000001803f1b3&apptime=1654372327" },
     ],
   },
