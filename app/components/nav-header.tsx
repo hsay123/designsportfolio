@@ -11,11 +11,11 @@ const navLinks = [
 export function NavHeader() {
   return (
     <nav className="relative z-[100]">
-      <div className="mx-auto max-w-[1400px] px-8 pt-6 pb-3 flex items-center justify-between">
-        <a href="/" className="flex items-center ml-0 pl-0">
-          <img src="/Ylogo.png" alt="Yash Landge Logo" className="h-6 w-auto object-contain block" />
+      <div className="mx-auto max-w-[1400px] px-8 flex items-center justify-between h-14 overflow-y-visible">
+        <a href="/" className="flex items-center ml-0 pl-0 shrink-0">
+          <img src="/Ylogo.png" alt="Yash Landge Logo" className="w-[110px] h-auto object-contain block" />
         </a>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 shrink-0">
           {navLinks.map((link) => (
             <a
               key={link.href}
