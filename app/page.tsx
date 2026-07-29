@@ -178,9 +178,9 @@ export default function Home() {
           </div>
         </a>
         {/* Center text */}
-        <div className="absolute top-[42%] left-[calc(50%+30px)] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-10">
+        <div className="absolute top-[42%] left-[calc(50%+30px)] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-0 z-10">
           <div className="relative hero-entrance overflow-hidden" style={{ animation: "hero-blur-in 0.6s ease-out 0.3s both" }}>
-            <img src="/yash-sing.png" alt="Yash Sing" className="h-[200px] md:h-[220px]" draggable={false} />
+            <img src="/yash-sing.png" alt="Yash Sing" className="h-[200px] md:h-[220px] block" draggable={false} />
             {/* Glare sweep */}
             <div className="absolute inset-0 pointer-events-none" style={{ animation: "hero-glare 1.2s ease-in-out 5s both" }}>
               <div className="absolute top-0 h-full w-[60%] -skew-x-12" style={{
@@ -188,7 +188,7 @@ export default function Home() {
               }} />
             </div>
           </div>
-          <p className="font-[family-name:var(--font-noto)] text-xs md:text-base text-stone-500 text-center tracking-[0.2em] uppercase hero-entrance ml-3" style={{ lineHeight: "1.8", animation: "hero-fade-in 0.5s cubic-bezier(0.4,0,0.2,1) 1.9s both" }}>
+          <p className="font-[family-name:var(--font-noto)] text-xs md:text-base text-stone-500 text-center tracking-[0.2em] uppercase hero-entrance ml-3" style={{ lineHeight: "1.8", transform: "translateY(-40px)", animation: "hero-fade-in 0.5s cubic-bezier(0.4,0,0.2,1) 1.9s both" }}>
             I think, then I build
           </p>
         </div>
