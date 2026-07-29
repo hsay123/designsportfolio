@@ -180,7 +180,7 @@ export default function Home() {
         {/* Center text */}
         <div className="absolute top-[42%] left-[calc(50%+30px)] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-10">
           <div className="relative mb-4 hero-entrance overflow-hidden" style={{ animation: "hero-blur-in 0.6s ease-out 0.3s both" }}>
-            <img src="/yash-sing.png" alt="Yash Sing" className="h-[84px] md:h-[104px]" draggable={false} />
+            <img src="/yash-sing.png" alt="Yash Sing" className="h-[200px] md:h-[220px]" draggable={false} />
             {/* Glare sweep */}
             <div className="absolute inset-0 pointer-events-none" style={{ animation: "hero-glare 1.2s ease-in-out 5s both" }}>
               <div className="absolute top-0 h-full w-[60%] -skew-x-12" style={{
