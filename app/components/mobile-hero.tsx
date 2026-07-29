@@ -289,7 +289,7 @@ export function MobileHero() {
         {/* Name + tagline */}
         <div className="flex flex-col items-center gap-0">
           <img src="/yash-sing.png" alt="Yash Sing" className="h-[165px] block" draggable={false} />
-          <p className="font-[family-name:var(--font-noto)] text-[9px] text-stone-500 text-center tracking-[0.18em] uppercase" style={{ lineHeight: "1.8", transform: "translateY(-40px)" }}>
+          <p className="font-[family-name:var(--font-noto)] text-[9px] text-stone-500 text-center tracking-[0.18em] uppercase" style={{ lineHeight: "1.8", transform: "translateY(-50px)" }}>
             I think, then I build.
           </p>
         </div>
