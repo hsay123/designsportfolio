@@ -209,14 +209,14 @@ export function NameBadge() {
         opacity: { duration: 0.05, delay: 6.5 },
       }}
     >
-     <a href="https://www.linkedin.com/in/uwyanliudesign" target="_blank" rel="noopener noreferrer" className="badge-swing flex flex-col items-center cursor-pointer group/badge">
+     <a href="https://www.linkedin.com/in/yashlandge01" target="_blank" rel="noopener noreferrer" className="badge-swing flex flex-col items-center cursor-pointer group/badge">
       {/* Lanyard strap — extra tall to avoid gap when swinging */}
       <div className="w-[26px] h-[240px] bg-stone-800 relative shadow-sm z-0">
         <div className="absolute inset-0 opacity-20" style={{
           backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.3) 2px, rgba(255,255,255,0.3) 3px)",
         }} />
         <span className="absolute bottom-[40%] left-1/2 -translate-x-1/2 -rotate-90 font-mono text-[6px] font-bold text-white/60 tracking-[0.2em] uppercase whitespace-nowrap select-none">
-          yanliu.design
+          yash.design
         </span>
       </div>
 
@@ -259,7 +259,7 @@ export function NameBadge() {
             }} />
             {/* Name */}
             <div className="relative z-10">
-              <h3 className="text-white font-extrabold text-[28px] leading-[1.05] tracking-[0.15em]">刘彦</h3>
+              <h3 className="text-white font-extrabold text-[28px] leading-[1.05] tracking-[0.15em]">ヤシュ</h3>
               <p className="font-[family-name:var(--font-noto)] text-white/50 text-[11px] tracking-[0.05em] mt-2 leading-relaxed">Love exploring, prototyping,<br />storytelling, and visual craft</p>
             </div>
             {/* Starburst accent */}

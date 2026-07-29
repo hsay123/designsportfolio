@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 // hover state removed — typing auto-starts on load
 
 const terminalLines = [
-  { prompt: "$ whoami", output: "Senior Product Designer with 7+ years experience" },
-  { prompt: "$ ls interests/", output: "AI/designs/doodles/photography" },
+  { prompt: "$ whoami", output: "UI/UX Designer & Devloper" },
+  { prompt: "$ ls interests/", output: "AI/designs/doodles/photography/creativity" },
 ];
 
 export function RetroWindows() {
