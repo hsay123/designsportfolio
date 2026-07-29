@@ -12,8 +12,8 @@ export function NavHeader() {
   return (
     <nav className="relative z-[100]">
       <div className="mx-auto max-w-[1400px] px-8 pt-6 pb-3 flex items-center justify-between">
-        <a href="/" className="flex items-center">
-          <img src="/Ylogo.png" alt="Yash Landge Logo" className="h-[106px] w-auto object-contain" />
+        <a href="/" className="flex items-center ml-0 pl-0">
+          <img src="/Ylogo.png" alt="Yash Landge Logo" className="h-6 w-auto object-contain block" />
         </a>
         <div className="flex items-center gap-6">
           {navLinks.map((link) => (
