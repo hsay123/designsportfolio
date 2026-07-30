@@ -15,6 +15,7 @@ const folderColors = [
   { bg: "#8DC4AB", tab: "#7DB49B", label: "white" },
   { bg: "#E09D98", tab: "#D08D88", label: "white" },
   { bg: "#B09AD0", tab: "#A08AC0", label: "white" },
+  { bg: "#C0A898", tab: "#B09888", label: "white" },
 ];
 
 const folderImages = [
@@ -23,6 +24,7 @@ const folderImages = [
   "/sheet-community.jpg",
   "/through-my-lens.jpg",
   "/sheet-sketch.jpg",
+  "/sheet-dev.jpg",
 ];
 
 const folderIcons = [
@@ -31,6 +33,7 @@ const folderIcons = [
   "/folder-icon-community.svg",
   "/folder-icon-lens.svg",
   "/folder-icon-sketch.svg",
+  "/folder-icon-dev.svg",
 ];
 
 const folderContent = [
@@ -61,6 +64,11 @@ const folderContent = [
       { label: "Instagram", url: "https://www.instagram.com/__yash_l_10" },
       { label: "RedNote", url: "https://www.xiaohongshu.com/user/profile/5cf87836000000001803f1b3?xhsshare=CopyLink&appuid=5cf87836000000001803f1b3&apptime=1654372327" },
     ],
+  },
+  {
+    title: "Dev Projects",
+    description: "",
+    projects: [],
   },
 ];
 
@@ -336,8 +344,152 @@ function LockNotification({ onUnlock }: { onUnlock: () => void }) {
   );
 }
 
+/* ── Dev Projects: File grid ── */
+function DevFileGrid({ projects, onSelect }: {
+  projects: { title: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
+  onSelect: (index: number) => void;
+}) {
+  if (projects.length === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="flex items-center justify-center h-full"
+      >
+        <div className="text-center p-8">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#a8a29e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-3">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+          <p className="text-[13px] text-stone-400 leading-relaxed">More projects coming soon</p>
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="p-6"
+    >
+      <div className="grid grid-cols-3 gap-4 content-start">
+        {projects.map((project, idx) => (
+          <motion.button
+            key={idx}
+            onClick={() => onSelect(idx)}
+            whileHover={{ y: -4 }}
+            className="flex flex-col items-center gap-2 cursor-pointer group"
+          >
+            <div className="relative w-[90px] h-[110px]">
+              <svg width="90" height="110" viewBox="0 0 90 110" fill="none" className="absolute inset-0">
+                <path d="M6 2h58l20 20v82a4 4 0 01-4 4H6a4 4 0 01-4-4V6a4 4 0 014-4z" fill="white" stroke="#d4d4d4" strokeWidth="0.8"/>
+                <path d="M64 2v16a4 4 0 004 4h16" fill="#ebebeb" stroke="#d4d4d4" strokeWidth="0.8" strokeLinejoin="round"/>
+              </svg>
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                className="absolute inset-[6px] top-[28px] bottom-[20px] w-auto h-auto object-cover rounded-[3px]"
+              />
+              {project.video === null && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-[3px]">
+                  <span className="text-[8px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
+                </div>
+              )}
+            </div>
+            <span className="text-[10px] text-stone-600 group-hover:text-stone-800 text-center leading-tight max-w-[90px] transition-colors">
+              {project.title}
+            </span>
+          </motion.button>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Dev Projects: File detail panel ── */
+function DevFileDetail({ project, onBack }: {
+  project: { title: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null } | undefined;
+  onBack: () => void;
+}) {
+  if (!project) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <button
+        onClick={onBack}
+        className="flex items-center gap-1 px-5 pt-4 pb-0 text-[13px] text-stone-500 hover:text-stone-700 transition-colors cursor-pointer"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span>Dev Projects</span>
+      </button>
+      <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
+        {project.video ? (
+          <video
+            src={project.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="relative w-full h-full flex items-center justify-center bg-stone-100">
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+              <span className="text-[13px] text-white font-medium bg-black/60 px-3 py-1.5 rounded-md">Demo coming soon</span>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="p-5 space-y-4">
+        <h3 className="text-[16px] font-medium text-stone-800">{project.title}</h3>
+        <p className="text-stone-600 leading-relaxed text-[14px]">{project.description}</p>
+        <div className="flex gap-3 pt-2">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[13px] px-4 py-1.5 rounded-md border border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white transition-colors"
+            >
+              Live
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-[13px] px-4 py-1.5 rounded-md border border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white transition-colors"
+            >
+              GitHub
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function FolderWindowContent() {
   const [openFolder, setOpenFolder] = useState<number | null>(null);
+  const [openFile, setOpenFile] = useState<number | null>(null);
   const [unlocked, setUnlocked] = useState(true);
   const [activeSidebar, setActiveSidebar] = useState("yanliu");
   const [isMobile, setIsMobile] = useState(false);
@@ -441,7 +593,7 @@ export function FolderWindowContent() {
                       className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
                       style={!isMobile ? { width: openFolder !== null ? 420 : "100%" } : undefined}
                     >
-                      <div className={`grid grid-cols-3 ${openFolder !== null ? "lg:grid-cols-3" : "lg:grid-cols-5"} gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 content-start w-fit`}>
+                       <div className={`grid grid-cols-3 ${openFolder !== null ? "lg:grid-cols-3" : "lg:grid-cols-6"} gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 content-start w-fit`}>
                         {siteConfig.sections.map((section, i) => (
                           <FolderIcon
                             key={section.id}
@@ -449,7 +601,7 @@ export function FolderWindowContent() {
                             title={section.title}
                             icon={folderIcons[i]}
                             isSelected={openFolder === i}
-                            onClick={() => setOpenFolder(openFolder === i ? null : i)}
+                            onClick={() => { setOpenFolder(openFolder === i ? null : i); setOpenFile(null); }}
                           />
                         ))}
                       </div>
@@ -478,96 +630,112 @@ export function FolderWindowContent() {
                           </button>
                           <div className="flex-1 overflow-y-auto">
                             <AnimatePresence mode="wait">
-                              <motion.div
-                                key={openFolder}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
-                                  {openFolder === 0 ? (
-                                    <video
-                                      src="/projects-at-work.mp4"
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    />
-                                  ) : openFolder === 1 ? (
-                                    <video
-                                      src="/design-with-ai.mp4"
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    />
-                                  ) : openFolder === 2 ? (
-                                    <video
-                                      src="/community-impact.mp4"
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    />
-                                  ) : openFolder === 4 ? (
-                                    <video
-                                      src="/sketch-to-merch.mp4"
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    />
-                                  ) : openFolder === 3 ? (
-                                    <video
-                                      src="/2025-nature.mp4"
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover"
-                                    />
-                                  ) : (
-                                    <Image src={folderImages[openFolder]} alt={folderContent[openFolder].title} width={580} height={340} className="w-full h-full object-contain" priority />
-                                  )}
-                                </div>
-                                <div className="p-5 space-y-4">
-                                  <h3 className="text-[16px] font-medium text-stone-800">{folderContent[openFolder].title}</h3>
-                                  {folderContent[openFolder].description.split("\n\n").map((para, i) => (
-                                    <p key={i} className="text-stone-600 leading-relaxed text-[14px]">
-                                      {renderBold(para)}
-                                    </p>
-                                  ))}
-                                  {"note" in folderContent[openFolder] && folderContent[openFolder].note && (
-                                    <p className="text-stone-500 italic text-[13px] leading-relaxed">
-                                      {folderContent[openFolder].note}
-                                    </p>
-                                  )}
-                                  {folderContent[openFolder]?.cta && (() => {
-                                    const cta = folderContent[openFolder].cta;
-                                    const links = Array.isArray(cta) ? cta.flat() : [cta];
-                                    return (
-                                      <div className="flex gap-4 flex-wrap pt-2">
-                                        {links.map((link, li) => (
-                                          <a
-                                            key={li}
-                                            href={(link as {label: string; url: string}).url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-block text-[13px] px-4 py-1.5 rounded-md border border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white transition-colors"
-                                          >
-                                            {(link as {label: string; url: string}).label}
-                                          </a>
-                                        ))}
-                                      </div>
-                                    );
-                                  })()}
-                                </div>
-                              </motion.div>
+                              {openFolder === 5 ? (
+                                openFile === null ? (
+                                  <DevFileGrid
+                                    key="file-grid"
+                                    projects={folderContent[5].projects || []}
+                                    onSelect={(idx) => setOpenFile(idx)}
+                                  />
+                                ) : (
+                                  <DevFileDetail
+                                    key="file-detail"
+                                    project={(folderContent[5].projects || [])[openFile]}
+                                    onBack={() => setOpenFile(null)}
+                                  />
+                                )
+                              ) : (
+                                <motion.div
+                                  key={openFolder}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
+                                    {openFolder === 0 ? (
+                                      <video
+                                        src="/projects-at-work.mp4"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : openFolder === 1 ? (
+                                      <video
+                                        src="/design-with-ai.mp4"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : openFolder === 2 ? (
+                                      <video
+                                        src="/community-impact.mp4"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : openFolder === 4 ? (
+                                      <video
+                                        src="/sketch-to-merch.mp4"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : openFolder === 3 ? (
+                                      <video
+                                        src="/2025-nature.mp4"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                      />
+                                    ) : (
+                                      <Image src={folderImages[openFolder]} alt={folderContent[openFolder].title} width={580} height={340} className="w-full h-full object-contain" priority />
+                                    )}
+                                  </div>
+                                  <div className="p-5 space-y-4">
+                                    <h3 className="text-[16px] font-medium text-stone-800">{folderContent[openFolder].title}</h3>
+                                    {folderContent[openFolder].description.split("\n\n").map((para, i) => (
+                                      <p key={i} className="text-stone-600 leading-relaxed text-[14px]">
+                                        {renderBold(para)}
+                                      </p>
+                                    ))}
+                                    {"note" in folderContent[openFolder] && folderContent[openFolder].note && (
+                                      <p className="text-stone-500 italic text-[13px] leading-relaxed">
+                                        {folderContent[openFolder].note}
+                                      </p>
+                                    )}
+                                    {folderContent[openFolder]?.cta && (() => {
+                                      const cta = folderContent[openFolder].cta;
+                                      const links = Array.isArray(cta) ? cta.flat() : [cta];
+                                      return (
+                                        <div className="flex gap-4 flex-wrap pt-2">
+                                          {links.map((link, li) => (
+                                            <a
+                                              key={li}
+                                              href={(link as {label: string; url: string}).url}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="inline-block text-[13px] px-4 py-1.5 rounded-md border border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white transition-colors"
+                                            >
+                                              {(link as {label: string; url: string}).label}
+                                            </a>
+                                          ))}
+                                        </div>
+                                      );
+                                    })()}
+                                  </div>
+                                </motion.div>
+                              )}
                             </AnimatePresence>
                           </div>
                         </motion.div>

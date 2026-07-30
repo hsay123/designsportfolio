@@ -94,6 +94,12 @@ export const siteConfig = {
         url: "#",
       },
     },
+    {
+      id: "dev-projects",
+      title: "Dev Projects",
+      description: "",
+      highlights: [],
+    },
   ],
   footer: {
     copyright: "2025",

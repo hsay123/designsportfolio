@@ -42,12 +42,14 @@ function RightPage({ sectionIndex }: { sectionIndex: number }) {
           </div>
         ))}
       </div>
-      <a
-        href={section.cta.url}
-        className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:underline underline-offset-2 mt-auto"
-      >
-        {section.cta.label} <span>&rarr;</span>
-      </a>
+      {section.cta && (
+        <a
+          href={section.cta.url}
+          className="inline-flex items-center gap-1 text-sm text-accent font-medium hover:underline underline-offset-2 mt-auto"
+        >
+          {section.cta.label} <span>&rarr;</span>
+        </a>
+      )}
     </div>
   );
 }
