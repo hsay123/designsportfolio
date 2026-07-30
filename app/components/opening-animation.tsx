@@ -51,10 +51,14 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
     const letterDefs = [
       { char: "Y", group: "first" },
       { char: "a", group: "first" },
-      { char: "n", group: "first" },
+      { char: "s", group: "first" },
+      { char: "h", group: "first" },
       { char: "L", group: "second" },
-      { char: "i", group: "second" },
-      { char: "u", group: "second" },
+      { char: "a", group: "second" },
+      { char: "n", group: "second" },
+      { char: "d", group: "second" },
+      { char: "g", group: "second" },
+      { char: "e", group: "second" },
     ];
 
     // Inner wrapper for letters — shake applies here, not the background
@@ -80,7 +84,7 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
         color: "#ffffff", opacity: "0", willChange: "transform, opacity",
         userSelect: "none", lineHeight: "1", fontFamily: "'Noto Sans', sans-serif",
       });
-      el.textContent = def.char === "i" ? "\u0131" : def.char;
+      el.textContent = def.char;
       lettersWrapper.appendChild(el);
       return { el, char: def.char, group: def.group };
     });
@@ -88,24 +92,28 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
     // Measure and compute final positions
     els.forEach(o => { o.el.style.opacity = "0.01"; });
 
-    const yanGaps = [-6, 4];
-    const liuGaps = [0, 4];
+    const yashGaps = [-6, 0, 2];
+    const landgeGaps = [0, 0, 0, 2, 0];
     const wordGap = 36;
     const widths = els.map(o => o.el.offsetWidth);
 
-    const yanWidth = widths[0] + yanGaps[0] + widths[1] + yanGaps[1] + widths[2];
-    const liuWidth = widths[3] + liuGaps[0] + widths[4] + liuGaps[1] + widths[5];
-    const totalWidth = yanWidth + wordGap + liuWidth;
+    const yashWidth = widths[0] + yashGaps[0] + widths[1] + yashGaps[1] + widths[2] + yashGaps[2] + widths[3];
+    const landgeWidth = widths[4] + landgeGaps[0] + widths[5] + landgeGaps[1] + widths[6] + landgeGaps[2] + widths[7] + landgeGaps[3] + widths[8] + landgeGaps[4] + widths[9];
+    const totalWidth = yashWidth + wordGap + landgeWidth;
 
     let x = CENTER_X - totalWidth / 2;
     const y = CENTER_Y - FONT_SIZE / 2;
     const finalPos: { x: number; y: number }[] = [];
 
-    finalPos.push({ x, y }); x += widths[0] + yanGaps[0];
-    finalPos.push({ x, y }); x += widths[1] + yanGaps[1];
-    finalPos.push({ x, y }); x += widths[2] + wordGap;
-    finalPos.push({ x, y }); x += widths[3] + liuGaps[0];
-    finalPos.push({ x, y }); x += widths[4] + liuGaps[1];
+    finalPos.push({ x, y }); x += widths[0] + yashGaps[0];
+    finalPos.push({ x, y }); x += widths[1] + yashGaps[1];
+    finalPos.push({ x, y }); x += widths[2] + yashGaps[2];
+    finalPos.push({ x, y }); x += widths[3] + wordGap;
+    finalPos.push({ x, y }); x += widths[4] + landgeGaps[0];
+    finalPos.push({ x, y }); x += widths[5] + landgeGaps[1];
+    finalPos.push({ x, y }); x += widths[6] + landgeGaps[2];
+    finalPos.push({ x, y }); x += widths[7] + landgeGaps[3];
+    finalPos.push({ x, y }); x += widths[8] + landgeGaps[4];
     finalPos.push({ x, y });
 
     els.forEach(o => { o.el.style.opacity = "0"; });
@@ -121,7 +129,7 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
 
     async function run() {
       const yEl = els[0];
-      const lEl = els[3];
+      const lEl = els[4];
 
       // STEP 1: Y rises from bottom
       const yCenterX = CENTER_X - yEl.el.offsetWidth / 2;
@@ -170,8 +178,12 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
       const burstLetters = [
         { obj: els[1], angle: -140, dist: 250, burstX: 0, burstY: 0 },
         { obj: els[2], angle: -200, dist: 220, burstX: 0, burstY: 0 },
-        { obj: els[4], angle: -20, dist: 200, burstX: 0, burstY: 0 },
-        { obj: els[5], angle: 30, dist: 260, burstX: 0, burstY: 0 },
+        { obj: els[3], angle: -250, dist: 200, burstX: 0, burstY: 0 },
+        { obj: els[5], angle: -20, dist: 200, burstX: 0, burstY: 0 },
+        { obj: els[6], angle: 30, dist: 240, burstX: 0, burstY: 0 },
+        { obj: els[7], angle: 80, dist: 210, burstX: 0, burstY: 0 },
+        { obj: els[8], angle: 130, dist: 230, burstX: 0, burstY: 0 },
+        { obj: els[9], angle: 180, dist: 200, burstX: 0, burstY: 0 },
       ];
 
       const burstPromises = burstLetters.map(bl => {
@@ -201,12 +213,12 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
       });
       await Promise.all(settlePromises);
 
-      // STEP 6: Dot of "i" bounces in immediately
+      // STEP 6: Decorative dot bounces in at end of "Landge"
       await delay(100);
-      const iEl = els[4].el;
-      const iRect = iEl.getBoundingClientRect();
-      const dotFinalX = iRect.left + iRect.width / 2 - 11;
-      const dotFinalY = iRect.top - 2;
+      const lastEl = els[9].el;
+      const lastRect = lastEl.getBoundingClientRect();
+      const dotFinalX = lastRect.left + lastRect.width / 2 - 11;
+      const dotFinalY = lastRect.top - 2;
 
       await animate(iDot,
         { x: dotFinalX, y: -50, scale: 1, opacity: 1 },
@@ -224,15 +236,15 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
         200, easeInQuad
       );
 
-      // STEP 7: "Liu" leans into italic (dot shifts with the lean to stay over the i)
+      // STEP 7: "Landge" leans into italic (dot shifts with the lean)
       await delay(120);
-      const liuEls = [els[3].el, els[4].el, els[5].el];
-      const iElRect = els[4].el.getBoundingClientRect();
-      const iCenterY = iElRect.top + iElRect.height / 2;
+      const landgeEls = [els[4].el, els[5].el, els[6].el, els[7].el, els[8].el, els[9].el];
+      const dotElRect = els[9].el.getBoundingClientRect();
+      const dotCenterYRef = dotElRect.top + dotElRect.height / 2;
       const dotCenterYNow = dotFinalY + 11;
-      const dotYOffsetFromICenter = dotCenterYNow - iCenterY; // negative (dot above center)
+      const dotYOffsetFromCenter = dotCenterYNow - dotCenterYRef;
       const targetSkew = -13;
-      const maxDotShiftX = Math.tan((-targetSkew * Math.PI) / 180) * -dotYOffsetFromICenter;
+      const maxDotShiftX = Math.tan((-targetSkew * Math.PI) / 180) * -dotYOffsetFromCenter;
 
       await new Promise<void>((resolve) => {
         const startTime = performance.now();
@@ -242,7 +254,7 @@ export function OpeningAnimation({ onComplete }: { onComplete: () => void }) {
           const e = easeOutCubic(t);
           const skew = targetSkew * e;
           const dotShiftX = maxDotShiftX * e;
-          liuEls.forEach((el) => {
+          landgeEls.forEach((el) => {
             const px = el.dataset.posX || "0";
             const py = el.dataset.posY || "0";
             el.style.transform = `translate3d(${px}px, ${py}px, 0) skewX(${skew}deg)`;
