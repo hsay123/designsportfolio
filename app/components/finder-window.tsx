@@ -42,7 +42,7 @@ const folderContent = [
   {
     title: "Design with AI and beyond",
     description: "Experimenting and building with AI tools — prototyping ideas quickly and shipping projects along the way.\n\nHighlights include launching my first **Chrome extension Focus Now** to park extra tabs and reduce clutter, and Cozy Journaling, winner of the **Built with Claude Sonnet 4.5 \"Keep Creating\" Award**.",
-    cta: { label: "Vibe coding projects", url: "https://open.spotify.com/playlist/5tFwl5Xur2CDCyzBeM3KBs?si=iWukyol1Q_K-n5uRSNJw-Q" },
+    cta: { label: "Vibe coding projects", url: "https://github.com/hsay123?tab=repositories" },
   },
   {
     title: "Community Impact",
@@ -608,7 +608,7 @@ export function FolderWindowContent() {
                       ].map((doc, i) => (
                         <motion.a
                           key={doc.name}
-                          href="https://yanliu.design/"
+                          href="https://thisisyash.vercel.app"
                           target="_blank"
                           rel="noopener noreferrer"
                           initial={{ opacity: 0, y: 20 }}
