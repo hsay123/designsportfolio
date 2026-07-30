@@ -186,12 +186,12 @@ export function MobileHero() {
                     <img
                       src="/profile.png"
                       alt="Yan Liu"
-                      className="w-full h-full object-cover transition-opacity duration-300"
+                      className="w-full h-full object-cover object-[center_20%] scale-[1.75] transition-opacity duration-300"
                       style={{ opacity: badgeTapped ? 0 : 1 }}
                       draggable={false}
                     />
                     <video
-                      src="/badge-hover.mp4"
+                      src="/hover%20VID.mp4"
                       muted
                       loop
                       playsInline
