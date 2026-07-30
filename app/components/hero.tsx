@@ -151,9 +151,9 @@ export function MacFolder() {
         {/* Items that pop out on hover */}
         {/* iPad + notebook — left */}
         <img
-          src="/Ipad and notebook.svg"
+          src="/iPad.png"
           alt="iPad and notebook"
-          className="absolute left-1/2 bottom-[30%] w-[105px] -translate-x-1/2 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 group-hover:-translate-y-[75px] group-hover:-translate-x-[140px] group-hover:rotate-[-15deg] z-10"
+          className="absolute left-1/2 bottom-[30%] w-[105px] h-auto object-contain -translate-x-1/2 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 group-hover:-translate-y-[75px] group-hover:-translate-x-[140px] group-hover:rotate-[-15deg] z-10"
           style={{ filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.25))" }}
           draggable={false}
         />
