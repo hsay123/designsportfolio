@@ -409,7 +409,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
             className="flex flex-col overflow-hidden rounded-2xl cursor-pointer group w-[170px] aspect-square bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
             <div className="relative flex-1 overflow-hidden">
-              <div className="absolute inset-2 rounded-lg overflow-hidden border border-white/25">
+              <div className="absolute inset-2 rounded-lg overflow-hidden border-[0.5px] border-white/15">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
