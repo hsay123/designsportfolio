@@ -409,19 +409,18 @@ function DevFileGrid({ projects, onSelect, onBack }: {
             className="flex flex-col overflow-hidden rounded-2xl cursor-pointer group w-[170px] aspect-square bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
             <div className="relative flex-1 overflow-hidden">
-              <img
-                src={project.thumbnail}
-                alt={project.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <span className="absolute top-3 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-amber-500 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                {project.eyebrow}
-              </span>
-              {project.video === null && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                  <span className="text-[9px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
-                </div>
-              )}
+              <div className="absolute inset-2 rounded-lg overflow-hidden border border-white/25">
+                <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                {project.video === null && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <span className="text-[9px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="bg-[#1C1C1E] px-3 pt-3 pb-4 text-center">
               <h4 className="text-[16px] font-bold text-white leading-tight">{project.title}</h4>
