@@ -68,7 +68,16 @@ const folderContent = [
   {
     title: "Dev Projects",
     description: "",
-    projects: [],
+    projects: [
+      {
+        title: "Rupee Link (P2P)",
+        description: "RupeeLink lets users trade Indian Rupees for USDC stablecoins peer-to-peer — no centralized exchange needed. Buyers pay via Razorpay (UPI/IMPS/NEFT) and receive USDC directly to their wallet through a **Solidity escrow smart contract**.",
+        video: "/rupeelink.mp4",
+        thumbnail: "/rupeelink-thumb.jpg",
+        liveUrl: "https://rupeelink.vercel.app/",
+        githubUrl: "https://github.com/hsay123/Rupee-Link",
+      },
+    ],
   },
 ];
 
@@ -345,9 +354,10 @@ function LockNotification({ onUnlock }: { onUnlock: () => void }) {
 }
 
 /* ── Dev Projects: File grid ── */
-function DevFileGrid({ projects, onSelect }: {
+function DevFileGrid({ projects, onSelect, onBack }: {
   projects: { title: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
   onSelect: (index: number) => void;
+  onBack: () => void;
 }) {
   if (projects.length === 0) {
     return (
@@ -377,6 +387,15 @@ function DevFileGrid({ projects, onSelect }: {
       transition={{ duration: 0.2 }}
       className="p-6"
     >
+      <button
+        onClick={onBack}
+        className="flex items-center gap-1 mb-5 text-[13px] text-stone-500 hover:text-stone-700 transition-colors cursor-pointer"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span>Projects</span>
+      </button>
       <div className="grid grid-cols-3 gap-4 content-start">
         {projects.map((project, idx) => (
           <motion.button
@@ -459,7 +478,7 @@ function DevFileDetail({ project, onBack }: {
       </div>
       <div className="p-5 space-y-4">
         <h3 className="text-[16px] font-medium text-stone-800">{project.title}</h3>
-        <p className="text-stone-600 leading-relaxed text-[14px]">{project.description}</p>
+        <p className="text-stone-600 leading-relaxed text-[14px]">{renderBold(project.description)}</p>
         <div className="flex gap-3 pt-2">
           {project.liveUrl && (
             <a
@@ -490,6 +509,7 @@ function DevFileDetail({ project, onBack }: {
 export function FolderWindowContent() {
   const [openFolder, setOpenFolder] = useState<number | null>(null);
   const [openFile, setOpenFile] = useState<number | null>(null);
+  const [view, setView] = useState<"root" | "dev-projects-list" | "dev-projects-file">("root");
   const [unlocked, setUnlocked] = useState(true);
   const [activeSidebar, setActiveSidebar] = useState("yanliu");
   const [isMobile, setIsMobile] = useState(false);
@@ -518,7 +538,7 @@ export function FolderWindowContent() {
             </div>
             <div className="flex-1 text-center">
               <span className="text-[11px] text-stone-400">
-                ~/yanliu/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}
+                ~/yanliu/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}{view !== "root" ? "/dev-projects" : ""}
               </span>
             </div>
             <div className="w-[52px]" />
@@ -529,7 +549,7 @@ export function FolderWindowContent() {
             {sidebarItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => { setActiveSidebar(item.id); setOpenFolder(null); }}
+                onClick={() => { setActiveSidebar(item.id); setOpenFolder(null); setOpenFile(null); setView("root"); }}
                 className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 text-[11px] cursor-pointer transition-colors ${
                   activeSidebar === item.id
                     ? "bg-[#E8E0D4] text-stone-800 font-medium"
@@ -549,7 +569,7 @@ export function FolderWindowContent() {
               {sidebarItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => { setActiveSidebar(item.id); setOpenFolder(null); }}
+                  onClick={() => { setActiveSidebar(item.id); setOpenFolder(null); setOpenFile(null); setView("root"); }}
                   className={`w-full flex items-center gap-2 px-2 py-[5px] rounded-md text-[12px] text-left cursor-pointer transition-colors ${
                     activeSidebar === item.id
                       ? "bg-[#E8E0D4] text-stone-800"
@@ -588,71 +608,68 @@ export function FolderWindowContent() {
                     transition={{ duration: 0.2 }}
                     className="h-full flex"
                   >
-                    {/* Left: Folders */}
-                    <div
-                      className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
-                      style={!isMobile ? { width: openFolder !== null ? 420 : "100%" } : undefined}
-                    >
-                       <div className={`grid grid-cols-3 ${openFolder !== null ? "lg:grid-cols-3" : "lg:grid-cols-6"} gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 content-start w-fit`}>
-                        {siteConfig.sections.map((section, i) => (
-                          <FolderIcon
-                            key={section.id}
-                            color={folderColors[i]}
-                            title={section.title}
-                            icon={folderIcons[i]}
-                            isSelected={openFolder === i}
-                            onClick={() => { setOpenFolder(openFolder === i ? null : i); setOpenFile(null); }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right: Content preview */}
-                    <AnimatePresence>
-                      {openFolder !== null && (
-                        <motion.div
-                          key="preview"
-                          className="absolute lg:relative inset-0 lg:inset-auto border-l-0 lg:border-l border-stone-200/60 h-full lg:h-[700px] w-full lg:w-[580px] shrink-0 ml-auto flex flex-col z-10"
-                          initial={{ opacity: 0, x: 40 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 40 }}
-                          transition={{ duration: 0.35, ease: "easeOut" }}
-                          style={{ backgroundColor: "#FAF8F5" }}
+                    {/* ── Root view: folder grid + optional side panel ── */}
+                    {view === "root" ? (
+                      <>
+                        <div
+                          className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
+                          style={!isMobile ? { width: openFolder !== null ? 420 : "100%" } : undefined}
                         >
-                          <button
-                            onClick={() => setOpenFolder(null)}
-                            className="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm hover:bg-white/70 text-stone-600 hover:text-stone-800 transition-colors cursor-pointer"
-                          >
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <line x1="18" y1="6" x2="6" y2="18" />
-                              <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                          </button>
-                          <div className="flex-1 overflow-y-auto">
-                            <AnimatePresence mode="wait">
-                              {openFolder === 5 ? (
-                                openFile === null ? (
-                                  <DevFileGrid
-                                    key="file-grid"
-                                    projects={folderContent[5].projects || []}
-                                    onSelect={(idx) => setOpenFile(idx)}
-                                  />
-                                ) : (
-                                  <DevFileDetail
-                                    key="file-detail"
-                                    project={(folderContent[5].projects || [])[openFile]}
-                                    onBack={() => setOpenFile(null)}
-                                  />
-                                )
-                              ) : (
-                                <motion.div
-                                  key={openFolder}
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  transition={{ duration: 0.2 }}
-                                >
-                                  <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
+                           <div className={`grid grid-cols-3 ${openFolder !== null ? "lg:grid-cols-3" : "lg:grid-cols-6"} gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 content-start w-fit`}>
+                            {siteConfig.sections.map((section, i) => (
+                              <FolderIcon
+                                key={section.id}
+                                color={folderColors[i]}
+                                title={section.title}
+                                icon={folderIcons[i]}
+                                isSelected={openFolder === i}
+                                onClick={() => {
+                                  if (i === 5) {
+                                    setView("dev-projects-list");
+                                    setOpenFolder(null);
+                                    setOpenFile(null);
+                                  } else {
+                                    setOpenFolder(openFolder === i ? null : i);
+                                    setOpenFile(null);
+                                    setView("root");
+                                  }
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Right: Content preview for folders 0-4 */}
+                        <AnimatePresence>
+                          {openFolder !== null && (
+                            <motion.div
+                              key="preview"
+                              className="absolute lg:relative inset-0 lg:inset-auto border-l-0 lg:border-l border-stone-200/60 h-full lg:h-[700px] w-full lg:w-[580px] shrink-0 ml-auto flex flex-col z-10"
+                              initial={{ opacity: 0, x: 40 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: 40 }}
+                              transition={{ duration: 0.35, ease: "easeOut" }}
+                              style={{ backgroundColor: "#FAF8F5" }}
+                            >
+                              <button
+                                onClick={() => { setOpenFolder(null); setView("root"); }}
+                                className="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm hover:bg-white/70 text-stone-600 hover:text-stone-800 transition-colors cursor-pointer"
+                              >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18" />
+                                  <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                              </button>
+                              <div className="flex-1 overflow-y-auto">
+                                <AnimatePresence mode="wait">
+                                  <motion.div
+                                    key={openFolder}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
                                     {openFolder === 0 ? (
                                       <video
                                         src="/projects-at-work.mp4"
@@ -734,13 +751,58 @@ export function FolderWindowContent() {
                                       );
                                     })()}
                                   </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                                  </motion.div>
+                              </AnimatePresence>
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
+                  </>
+                ) : (
+                  /* ── Dev Projects view ── */
+                  <>
+                    <div
+                      className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
+                      style={!isMobile ? { width: view === "dev-projects-file" ? 420 : "100%" } : undefined}
+                    >
+                      <DevFileGrid
+                        projects={folderContent[5].projects || []}
+                        onSelect={(idx) => { setOpenFile(idx); setView("dev-projects-file"); }}
+                        onBack={() => { setOpenFile(null); setView("root"); }}
+                      />
+                    </div>
+
+                    <AnimatePresence>
+                      {view === "dev-projects-file" && openFile !== null && (
+                        <motion.div
+                          key="dev-file-preview"
+                          className="absolute lg:relative inset-0 lg:inset-auto border-l-0 lg:border-l border-stone-200/60 h-full lg:h-[700px] w-full lg:w-[580px] shrink-0 ml-auto flex flex-col z-10"
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: 40 }}
+                          transition={{ duration: 0.35, ease: "easeOut" }}
+                          style={{ backgroundColor: "#FAF8F5" }}
+                        >
+                          <button
+                            onClick={() => { setOpenFile(null); setView("dev-projects-list"); }}
+                            className="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-sm hover:bg-white/70 text-stone-600 hover:text-stone-800 transition-colors cursor-pointer"
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                          </button>
+                          <div className="flex-1 overflow-y-auto">
+                            <DevFileDetail
+                              project={(folderContent[5].projects || [])[openFile]}
+                              onBack={() => { setOpenFile(null); setView("dev-projects-list"); }}
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                )}
                   </motion.div>
                 ) : activeSidebar === "applications" ? (
                   <motion.div
