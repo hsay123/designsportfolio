@@ -401,10 +401,12 @@ function DevFileGrid({ projects, onSelect, onBack }: {
           <motion.button
             key={idx}
             onClick={() => onSelect(idx)}
+            whileHover={{ y: -4, boxShadow: "4px 6px 16px rgba(0,0,0,0.1)" }}
             whileTap={{ scale: 0.95 }}
-            className="flex flex-col items-center gap-2.5 cursor-pointer group w-[140px]"
+            transition={{ duration: 0.2 }}
+            className="flex flex-col items-center gap-2.5 cursor-pointer group w-[140px] bg-stone-50 rounded-2xl p-3.5 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
-            <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.1)] transition-shadow duration-200 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.14)]">
+            <div className="relative w-full aspect-video overflow-hidden rounded-lg">
               <img
                 src={project.thumbnail}
                 alt={project.title}
