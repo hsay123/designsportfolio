@@ -396,31 +396,27 @@ function DevFileGrid({ projects, onSelect, onBack }: {
         </svg>
         <span>Projects</span>
       </button>
-      <div className="grid grid-cols-3 gap-4 content-start">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 justify-items-start content-start">
         {projects.map((project, idx) => (
           <motion.button
             key={idx}
             onClick={() => onSelect(idx)}
-            whileHover={{ y: -4 }}
-            className="flex flex-col items-center gap-2 cursor-pointer group"
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center gap-2.5 cursor-pointer group w-[140px]"
           >
-            <div className="relative w-[90px] h-[110px]">
-              <svg width="90" height="110" viewBox="0 0 90 110" fill="none" className="absolute inset-0">
-                <path d="M6 2h58l20 20v82a4 4 0 01-4 4H6a4 4 0 01-4-4V6a4 4 0 014-4z" fill="white" stroke="#d4d4d4" strokeWidth="0.8"/>
-                <path d="M64 2v16a4 4 0 004 4h16" fill="#ebebeb" stroke="#d4d4d4" strokeWidth="0.8" strokeLinejoin="round"/>
-              </svg>
+            <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-[0_2px_4px_rgba(0,0,0,0.1)] transition-shadow duration-200 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.14)]">
               <img
                 src={project.thumbnail}
                 alt={project.title}
-                className="absolute inset-[6px] top-[28px] bottom-[20px] w-auto h-auto object-cover rounded-[3px]"
+                className="w-full h-full object-cover"
               />
               {project.video === null && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-[3px]">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                   <span className="text-[8px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
                 </div>
               )}
             </div>
-            <span className="text-[10px] text-stone-600 group-hover:text-stone-800 text-center leading-tight max-w-[90px] transition-colors">
+            <span className="text-[11px] leading-tight text-center whitespace-nowrap min-h-[28px] text-stone-500 group-hover:text-stone-700 transition-colors duration-200">
               {project.title}
             </span>
           </motion.button>
