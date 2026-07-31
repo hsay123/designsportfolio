@@ -75,7 +75,7 @@ const folderContent = [
         subtitle: "USDC · UPI · P2P",
         description: "RupeeLink lets users trade Indian Rupees for USDC stablecoins peer-to-peer — no centralized exchange needed. Buyers pay via Razorpay (UPI/IMPS/NEFT) and receive USDC directly to their wallet through a **Solidity escrow smart contract**.",
         video: "/rupeelink.mp4",
-        thumbnail: "/rupeelink-thumb.jpg",
+        thumbnail: "/rupeelink-thumb.png",
         liveUrl: "https://rupeelink.vercel.app/",
         githubUrl: "https://github.com/hsay123/Rupee-Link",
       },
@@ -398,7 +398,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
         </svg>
         <span>Projects</span>
       </button>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 justify-items-start content-start">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 justify-items-start content-start">
         {projects.map((project, idx) => (
           <motion.button
             key={idx}
@@ -406,7 +406,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
             whileHover={{ scale: 1.02, boxShadow: "4px 6px 16px rgba(0,0,0,0.1)" }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col overflow-hidden rounded-3xl cursor-pointer group w-[220px] aspect-[4/5] bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
+            className="flex flex-col overflow-hidden rounded-2xl cursor-pointer group w-[170px] aspect-square bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
             <div className="relative flex-1 overflow-hidden">
               <img
@@ -414,7 +414,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 alt={project.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <span className="absolute top-3 left-1/2 -translate-x-1/2 text-[13px] font-semibold text-amber-500 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+              <span className="absolute top-3 left-1/2 -translate-x-1/2 text-[11px] font-semibold text-amber-500 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
                 {project.eyebrow}
               </span>
               {project.video === null && (
@@ -423,9 +423,9 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 </div>
               )}
             </div>
-            <div className="bg-[#1C1C1E] px-4 pt-4 pb-5 text-center">
-              <h4 className="text-[22px] font-bold text-white leading-tight">{project.title}</h4>
-              <p className="mt-1.5 text-[13px] text-neutral-400 leading-snug">{project.subtitle}</p>
+            <div className="bg-[#1C1C1E] px-3 pt-3 pb-4 text-center">
+              <h4 className="text-[16px] font-bold text-white leading-tight">{project.title}</h4>
+              <p className="mt-1 text-[11px] text-neutral-400 leading-snug">{project.subtitle}</p>
             </div>
           </motion.button>
         ))}
