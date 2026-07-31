@@ -71,6 +71,8 @@ const folderContent = [
     projects: [
       {
         title: "Rupee Link (P2P)",
+        eyebrow: "P2P",
+        subtitle: "USDC · UPI · P2P",
         description: "RupeeLink lets users trade Indian Rupees for USDC stablecoins peer-to-peer — no centralized exchange needed. Buyers pay via Razorpay (UPI/IMPS/NEFT) and receive USDC directly to their wallet through a **Solidity escrow smart contract**.",
         video: "/rupeelink.mp4",
         thumbnail: "/rupeelink-thumb.jpg",
@@ -355,7 +357,7 @@ function LockNotification({ onUnlock }: { onUnlock: () => void }) {
 
 /* ── Dev Projects: File grid ── */
 function DevFileGrid({ projects, onSelect, onBack }: {
-  projects: { title: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
+  projects: { title: string; eyebrow: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
   onSelect: (index: number) => void;
   onBack: () => void;
 }) {
@@ -396,31 +398,35 @@ function DevFileGrid({ projects, onSelect, onBack }: {
         </svg>
         <span>Projects</span>
       </button>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 justify-items-start content-start">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 justify-items-start content-start">
         {projects.map((project, idx) => (
           <motion.button
             key={idx}
             onClick={() => onSelect(idx)}
-            whileHover={{ y: -4, boxShadow: "4px 6px 16px rgba(0,0,0,0.1)" }}
+            whileHover={{ scale: 1.02, boxShadow: "4px 6px 16px rgba(0,0,0,0.1)" }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="flex flex-col items-center gap-2.5 cursor-pointer group w-[140px] bg-stone-50 rounded-2xl p-3.5 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
+            className="flex flex-col overflow-hidden rounded-3xl cursor-pointer group w-[220px] aspect-[4/5] bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
-            <div className="relative w-full aspect-video overflow-hidden rounded-lg">
+            <div className="relative flex-1 overflow-hidden">
               <img
                 src={project.thumbnail}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
+              <span className="absolute top-3 left-1/2 -translate-x-1/2 text-[13px] font-semibold text-amber-500 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+                {project.eyebrow}
+              </span>
               {project.video === null && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                  <span className="text-[8px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
+                  <span className="text-[9px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
                 </div>
               )}
             </div>
-            <span className="text-[11px] leading-tight text-center whitespace-nowrap min-h-[28px] text-stone-500 group-hover:text-stone-700 transition-colors duration-200">
-              {project.title}
-            </span>
+            <div className="bg-[#1C1C1E] px-4 pt-4 pb-5 text-center">
+              <h4 className="text-[22px] font-bold text-white leading-tight">{project.title}</h4>
+              <p className="mt-1.5 text-[13px] text-neutral-400 leading-snug">{project.subtitle}</p>
+            </div>
           </motion.button>
         ))}
       </div>
@@ -430,7 +436,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
 
 /* ── Dev Projects: File detail panel ── */
 function DevFileDetail({ project, onBack }: {
-  project: { title: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null } | undefined;
+  project: { title: string; eyebrow: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null } | undefined;
   onBack: () => void;
 }) {
   if (!project) return null;
