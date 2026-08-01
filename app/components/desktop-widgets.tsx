@@ -520,7 +520,7 @@ const journeyData = [
   { step: "Introduced to the dev community", tag: "DEV" },
   { step: "Started building & designing products", tag: "PRODUCT" },
   { step: "Started hackathons — began winning", tag: "HACKATHON" },
-  { step: "Shipping TGVault... still building", tag: "NOW", hollow: true, pulse: true },
+  { step: "Still building...", tag: "BUILDING", hollow: true, pulse: true },
 ];
 
 function JourneyTimeline() {
@@ -600,7 +600,7 @@ function JourneyTimeline() {
           className="text-[10px] font-medium tracking-wider px-3 py-1.5 rounded-full shrink-0"
           style={{ background: "#ecfdf5", color: "#059669" }}
         >
-          NOW
+          BUILDING
         </span>
       </div>
     </motion.div>
