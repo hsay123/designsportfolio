@@ -76,6 +76,7 @@ const folderContent = [
         description: "RupeeLink lets users trade Indian Rupees for USDC stablecoins peer-to-peer — no centralized exchange needed. Buyers pay via Razorpay (UPI/IMPS/NEFT) and receive USDC directly to their wallet through a **Solidity escrow smart contract**.",
         video: "/rupeelink.mp4",
         thumbnail: "/rupeelink-thumb.png",
+        objectPosition: "5% 50%",
         liveUrl: "https://rupeelink.vercel.app/",
         githubUrl: "https://github.com/hsay123/Rupee-Link",
       },
@@ -366,7 +367,7 @@ function LockNotification({ onUnlock }: { onUnlock: () => void }) {
 
 /* ── Dev Projects: File grid ── */
 function DevFileGrid({ projects, onSelect, onBack }: {
-  projects: { title: string; eyebrow?: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
+  projects: { title: string; eyebrow?: string; subtitle: string; description: string; video: string | null; thumbnail: string; objectPosition?: string; liveUrl: string | null; githubUrl: string | null }[];
   onSelect: (index: number) => void;
   onBack: () => void;
 }) {
@@ -422,6 +423,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 src={project.thumbnail}
                 alt={project.title}
                 className="w-full h-full object-cover"
+                style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined}
               />
               {project.video === null && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
