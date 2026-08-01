@@ -2,7 +2,9 @@
   "name": "self-intro",
   "version": "1.0.0",
   "scripts": {
+    "predev": "node scripts/gen-bulletin-versions.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/gen-bulletin-versions.mjs",
     "build": "next build",
     "start": "next start"
   },
