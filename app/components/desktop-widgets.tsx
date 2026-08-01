@@ -514,14 +514,13 @@ function DockIcon({ tool, mouseX }: {
 }
 
 const journeyData = [
-  { step: "Studied law", tag: "LAW" },
-  { step: "Worked in robotics", tag: "AUTOMATION" },
-  { step: "Became a product designer", tag: "TECH" },
-  { step: "Designing AI products", tag: "AI" },
-  { step: "Building with AI", tag: "AI" },
-  { step: "Won Claude vibe-coding challenge", tag: "AI" },
-  { step: "Shipped a chrome extension", tag: "AI" },
-  { step: "AI native designer", tag: "NOW", hollow: true, pulse: true },
+  { step: "Bought a laptop, started editing", tag: "EDITING" },
+  { step: "Got into UI/UX design", tag: "DESIGN" },
+  { step: "Started B.Tech in IoT Engineering", tag: "IOT" },
+  { step: "Introduced to the dev community", tag: "DEV" },
+  { step: "Started building & designing products", tag: "PRODUCT" },
+  { step: "Started hackathons — began winning", tag: "HACKATHON" },
+  { step: "Shipping TGVault — still learning, still building", tag: "NOW", hollow: true, pulse: true },
 ];
 
 function JourneyTimeline() {
