@@ -71,15 +71,6 @@ const aiProjects = [
   },
 ];
 
-const additionalAchievements = [
-  { year: "2022", title: "Figma Community", detail: "670K+ uses · Finalist, Favorite Graphic Resources" },
-  { year: "–", title: "Unsplash", detail: "20M+ views · 150K downloads" },
-  { year: "2018", title: "Google Startup Weekend", detail: "Excellence in Execution" },
-  { year: "2018", title: "UW Dubstech Protothon", detail: "1st place, UX Competition" },
-  { year: "2017", title: "Darby Smart IIT Program", detail: "1st place, video-creation · 150K+ views" },
-  { year: "2016", title: "CommLead — #doyouseeme", detail: "Top 5 Capstone, UW MCDM Master's program" },
-];
-
 export function RecentStatus() {
   const [visible, setVisible] = useState(false);
   const [countStarted, setCountStarted] = useState(false);
@@ -140,28 +131,6 @@ export function RecentStatus() {
                   </span>
                 ))}
               </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Additional Achievements */}
-      <motion.div {...fadeIn(0.5)} className="text-[11px] text-stone-400 uppercase tracking-[0.2em] font-mono mt-8 mb-3 pb-2 border-b border-stone-200/50">
-        Additional Achievements
-      </motion.div>
-      <div className="space-y-0">
-        {additionalAchievements.map((item, i) => (
-          <motion.div
-            key={i}
-            {...fadeIn(0.55 + i * 0.05)}
-            className="flex gap-4 py-3 pl-3 -ml-3 rounded-lg relative cursor-default transition-all duration-200 hover:bg-stone-100/80 hover:pl-5 group"
-            style={{ borderBottom: i < additionalAchievements.length - 1 ? "1px solid rgba(214,211,209,0.4)" : "none" }}
-          >
-            <div className="absolute left-0 top-[12px] bottom-[12px] w-[3px] rounded-full bg-stone-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-            <span className="text-[11px] text-stone-400 font-mono w-[36px] shrink-0 pt-[2px]">{item.year}</span>
-            <div className="flex-1 min-w-0">
-              <div className="text-[14px] text-stone-800 font-semibold leading-snug">{item.title}</div>
-              <div className="text-[12px] text-stone-500 mt-0.5">{item.detail}</div>
             </div>
           </motion.div>
         ))}
