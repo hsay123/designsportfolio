@@ -429,17 +429,11 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 </div>
               )}
             </div>
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M 0 100 L 100 100 L 100 42 C 87 34, 65 31, 44 40 C 30 46, 12 54, 0 58 Z"
-                fill="#000"
-              />
-            </svg>
-            <div className="absolute left-4 right-4 top-[62%] z-10">
+            <div
+              className="absolute inset-0 bg-black"
+              style={{ clipPath: "polygon(0% 40%, 48% 40%, 58% 55%, 100% 55%, 100% 100%, 0% 100%)" }}
+            />
+            <div className="absolute left-4 right-4 top-[55%] z-10">
               <h4 className="text-[14px] font-bold text-white leading-tight truncate">{project.title}</h4>
               <p className="mt-1 text-[10px] text-neutral-400 leading-snug truncate">{project.subtitle}</p>
             </div>
