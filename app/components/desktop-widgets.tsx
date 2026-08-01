@@ -520,7 +520,7 @@ const journeyData = [
   { step: "Introduced to the dev community", tag: "DEV" },
   { step: "Started building & designing products", tag: "PRODUCT" },
   { step: "Started hackathons — began winning", tag: "HACKATHON" },
-  { step: "Shipping TGVault — still learning, still building", tag: "NOW", hollow: true, pulse: true },
+  { step: "Shipping TGVault... still building", tag: "NOW", hollow: true, pulse: true },
 ];
 
 function JourneyTimeline() {
@@ -579,7 +579,7 @@ function JourneyTimeline() {
       </div>
       {/* Highlighted last item */}
       <div
-        className="mt-3 rounded-xl px-5 py-4 flex items-center gap-3 transition-opacity duration-300"
+        className="mt-3 rounded-xl px-5 py-4 flex items-center gap-3 transition-opacity duration-300 overflow-hidden"
         style={{
           background: "#f5f5f4",
           border: "1px solid rgba(214,211,209,0.6)",
@@ -593,8 +593,8 @@ function JourneyTimeline() {
           <div className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-30" />
           <div className="w-[10px] h-[10px] rounded-full bg-emerald-500 relative" />
         </div>
-        <div className="flex-1">
-          <span className="text-[15px] text-stone-800 font-semibold block leading-tight whitespace-nowrap">{journeyData[journeyData.length - 1].step}</span>
+        <div className="flex-1 min-w-0">
+          <span className="text-[15px] text-stone-800 font-semibold block leading-tight">{journeyData[journeyData.length - 1].step}</span>
         </div>
         <span
           className="text-[10px] font-medium tracking-wider px-3 py-1.5 rounded-full shrink-0"
