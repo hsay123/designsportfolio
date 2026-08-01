@@ -40,58 +40,34 @@ function CountUp({ end, suffix, duration = 1500, autoStart = false }: { end: num
 
 const aiProjects = [
   {
-    year: "2026",
-    title: "Awwwards",
-    detail: "Vibe-coded portfolio received Awwwards Honorable Mention",
-    tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
-  },
-  {
-    year: "2026",
-    title: "Bestfolios",
-    detail: "Vibe-coded portfolio featured on Bestfolios",
-    tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
-  },
-  {
-    year: "2026",
-    title: "Wall of Portfolios",
-    detail: "Vibe-coded portfolio featured on Wall of Portfolios",
-    tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
-  },
-  {
-    year: "2026",
-    title: "CSSDesign Award",
-    detail: "Vibe-coded portfolio recognized with Special Kudos (March 18)",
-    tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
-  },
-  {
-    year: "2026",
-    title: "Figma Makeathon — Anonymous Letters Across Time",
-    detail: "15K impressions · 550 likes on X",
-    tags: [{ label: "SHIPPED", color: "#a08060", bg: "#f0e4d6" }],
-  },
-  {
-    year: "2026",
-    title: "Vibe Coding Playlist",
-    detail: "20+ AI experiments using Claude Code, Cursor, Figma Make, Google AI Studio",
-    tags: [{ label: "SHIPPED", color: "#a08060", bg: "#f0e4d6" }],
-  },
-  {
     year: "2025",
-    title: "Cozy Journaling",
-    detail: "Built with Claude Sonnet 4.5",
+    title: "Stellar Ragnarok Hackathon",
+    detail: "Winner — [PLACEHOLDER: project name / what was built / prize]",
     tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
   },
   {
     year: "2025",
-    title: "Focus Now Chrome Extension",
-    detail: "Built with Claude Code · Shipped on Chrome Web Store",
-    tags: [{ label: "SHIPPED", color: "#a08060", bg: "#f0e4d6" }],
+    title: "GDG Hackathon",
+    detail: "Winner — [PLACEHOLDER: project name / what was built / prize]",
+    tags: [{ label: "AWARD", color: "#9a8058", bg: "#f2ead8" }],
   },
   {
     year: "2025",
-    title: "yanliu Desktop OS",
-    detail: "Fully functional desktop environment · 40K impressions · 1K engagements on X",
-    tags: [{ label: "SHIPPED", color: "#a08060", bg: "#f0e4d6" }],
+    title: "ShadowFax",
+    detail: "Software Engineering Intern — [PLACEHOLDER: what was worked on]",
+    tags: [{ label: "ROLE", color: "#6b7a5e", bg: "#e6ebdd" }],
+  },
+  {
+    year: "2026",
+    title: "SSOC (Social Summer of Code)",
+    detail: "Open Source Contributor — [PLACEHOLDER: which project(s) / type of contributions]",
+    tags: [{ label: "OPEN SOURCE", color: "#5f7a8a", bg: "#e2ebee" }],
+  },
+  {
+    year: "2026",
+    title: "Midnight Fellowship",
+    detail: "Fellow — [PLACEHOLDER: what the fellowship focuses on / what is being built]",
+    tags: [{ label: "ROLE", color: "#6b7a5e", bg: "#e6ebdd" }],
   },
 ];
 

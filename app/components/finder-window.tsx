@@ -84,7 +84,7 @@ const folderContent = [
         description: "IPX Market is a decentralized marketplace for AI datasets that combines **Story Protocol** for provable IP ownership with **Google Vertex AI** for intelligent metadata extraction and NLP-powered discovery. Creators upload datasets with automatic AI-generated descriptions, register ownership on-chain, define custom licenses, and earn passive income through automated royalty distribution.",
         video: "/ipxmarket.mp4",
         thumbnail: "/ipxthum.png",
-        subtitle: "Story Protocol · Vertex AI · Web3",
+        subtitle: "Story Protocol · Web3",
         liveUrl: "https://v0-storypixmarket-an.vercel.app/",
         githubUrl: "https://github.com/hsay123/IPX-market",
       },
@@ -431,9 +431,9 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 )}
               </div>
             </div>
-            <div className="bg-[#1C1C1E] px-3 pt-3 pb-4 text-center">
-              <h4 className="text-[16px] font-bold text-white leading-tight">{project.title}</h4>
-              <p className="mt-1 text-[11px] text-neutral-400 leading-snug">{project.subtitle}</p>
+            <div className="bg-[#1C1C1E] px-3 pt-3 pb-4 text-center h-[67px] shrink-0 overflow-hidden">
+              <h4 className="text-[16px] font-bold text-white leading-tight truncate">{project.title}</h4>
+              <p className="mt-1 text-[11px] text-neutral-400 leading-snug truncate">{project.subtitle}</p>
             </div>
           </motion.button>
         ))}
