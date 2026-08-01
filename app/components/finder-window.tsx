@@ -431,9 +431,9 @@ function DevFileGrid({ projects, onSelect, onBack }: {
             </div>
             <div
               className="absolute inset-0 bg-black"
-              style={{ clipPath: "polygon(0% 40%, 48% 40%, 58% 55%, 100% 55%, 100% 100%, 0% 100%)" }}
+              style={{ clipPath: "polygon(0% 52%, 48% 52%, 58% 67%, 100% 67%, 100% 100%, 0% 100%)" }}
             />
-            <div className="absolute left-4 right-4 top-[55%] z-10">
+            <div className="absolute left-4 right-4 top-[72%] z-10">
               <h4 className="text-[14px] font-bold text-white leading-tight truncate">{project.title}</h4>
               <p className="mt-1 text-[10px] text-neutral-400 leading-snug truncate">{project.subtitle}</p>
             </div>
