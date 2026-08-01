@@ -79,6 +79,15 @@ const folderContent = [
         liveUrl: "https://rupeelink.vercel.app/",
         githubUrl: "https://github.com/hsay123/Rupee-Link",
       },
+      {
+        title: "IPX Market",
+        description: "IPX Market is a decentralized marketplace for AI datasets that combines **Story Protocol** for provable IP ownership with **Google Vertex AI** for intelligent metadata extraction and NLP-powered discovery. Creators upload datasets with automatic AI-generated descriptions, register ownership on-chain, define custom licenses, and earn passive income through automated royalty distribution.",
+        video: "/ipxmarket.mp4",
+        thumbnail: "/ipxthum.png",
+        subtitle: "Story Protocol · Vertex AI · Web3",
+        liveUrl: "https://v0-storypixmarket-an.vercel.app/",
+        githubUrl: "https://github.com/hsay123/IPX-market",
+      },
     ],
   },
 ];
@@ -357,7 +366,7 @@ function LockNotification({ onUnlock }: { onUnlock: () => void }) {
 
 /* ── Dev Projects: File grid ── */
 function DevFileGrid({ projects, onSelect, onBack }: {
-  projects: { title: string; eyebrow: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
+  projects: { title: string; eyebrow?: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null }[];
   onSelect: (index: number) => void;
   onBack: () => void;
 }) {
@@ -409,7 +418,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
             className="flex flex-col overflow-hidden rounded-2xl cursor-pointer group w-[170px] aspect-square bg-stone-50 shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
             <div className="relative flex-1 overflow-hidden">
-              <div className="absolute inset-2 rounded-lg overflow-hidden border-[0.5px] border-white/15">
+              <div className="absolute inset-[2px] rounded-2xl overflow-hidden border-[0.5px] border-white/10">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
@@ -435,7 +444,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
 
 /* ── Dev Projects: File detail panel ── */
 function DevFileDetail({ project, onBack }: {
-  project: { title: string; eyebrow: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null } | undefined;
+  project: { title: string; eyebrow?: string; subtitle: string; description: string; video: string | null; thumbnail: string; liveUrl: string | null; githubUrl: string | null } | undefined;
   onBack: () => void;
 }) {
   if (!project) return null;
