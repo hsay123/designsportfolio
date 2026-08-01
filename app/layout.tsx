@@ -19,9 +19,9 @@ const courierPrime = Courier_Prime({
 });
 
 export const metadata: Metadata = {
-  title: "Yan Liu — Product Designer",
+  title: "Yash Landge — Product Designer & Developer",
   description:
-    "I think, then I build. Senior Product Designer with 7+ years of experience.",
+    "I think, then I build. Product Designer and Developer shipping design and code.",
   icons: {
     icon: "/favicon.svg",
   },
