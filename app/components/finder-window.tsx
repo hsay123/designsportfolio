@@ -433,7 +433,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
               )}
             </div>
             <div
-              className="absolute inset-0 bg-black"
+              className="absolute inset-0 bg-[#1c1c1e]"
               style={{ clipPath: "polygon(0% 52%, 48% 52%, 58% 67%, 100% 67%, 100% 100%, 0% 100%)" }}
             />
             <div className="absolute left-4 right-4 top-[72%] z-10">
