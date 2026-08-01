@@ -425,6 +425,7 @@ function DevFileGrid({ projects, onSelect, onBack }: {
                 className="w-full h-full object-cover"
                 style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined}
               />
+              <div className="absolute inset-0 bg-[rgba(70,70,70,0.18)] pointer-events-none" />
               {project.video === null && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                   <span className="text-[9px] text-white font-medium bg-black/50 px-1.5 py-0.5 rounded">Demo soon</span>
