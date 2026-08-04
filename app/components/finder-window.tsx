@@ -39,8 +39,7 @@ const folderIcons = [
 const folderContent = [
   {
     title: "Projects at Work",
-    description: "From **multimodal conversational interfaces** to **natural language search** and **AI modifications**, I turn complex, ambiguous concepts into intuitive product experiences—taking ideas from 0→1 and shipping them.\n\nI also led work on search trend dashboards, contributor ingestion app redesigns, internal search editing tools, and watermark systems for Getty Images and iStock.",
-    note: "Feel free to reach out if you'd like to hear more about what I'm working on.",
+    description: "Content coming soon.",
   },
   {
     title: "Design with AI and beyond",
@@ -49,21 +48,15 @@ const folderContent = [
   },
   {
     title: "Community Impact",
-    description: "My Figma Community files have **670K+** uses. I design and share to help designers speed up workflows, explore ideas, and build faster.\n\n100+ Abstract Shapes / Elements was a finalist for Favorite Graphic Resources in the 2022 Figma Community Awards. 50+ Abstract Geometric Shapes was featured in the Day 2 virtual broadcast at Config 2024.",
-    cta: { label: "Figma designs", url: "https://www.figma.com/@yashlandge" },
+    description: "Content coming soon.",
   },
   {
     title: "Through My Lens",
-    description: "Nature helps me step away from daily routines and reset my perspective.\n\nMy photography has reached **20M+ views** and **150K+ downloads**, and has been used across platforms including BuzzFeed, Notion, Trello, Mailchimp, Fever, and Figma.",
-    cta: { label: "Photos on Unsplash", url: "https://unsplash.com/@yash213hw" },
+    description: "Content coming soon.",
   },
   {
     title: "From Sketch to Merch",
-    description: "I create illustrations and black-and-white doodles as a way to unwind and explore visual ideas.\n\nIn 2022, I collaborated with **SHEIN X Artist** to launch my merchandise collection, YANLIU. I share my work on Instagram and RedNote, where my illustrations have reached **50K+** likes, as a space to experiment, explore, and stay curious.",
-    cta: [
-      { label: "Instagram", url: "https://www.instagram.com/__yash_l_10" },
-      { label: "RedNote", url: "https://www.xiaohongshu.com/user/profile/5cf87836000000001803f1b3?xhsshare=CopyLink&appuid=5cf87836000000001803f1b3&apptime=1654372327" },
-    ],
+    description: "Content coming soon.",
   },
   {
     title: "Dev Projects",
@@ -265,9 +258,9 @@ function FolderSideSheet({ folderIndex, onClose, onNavigate }: {
                     {renderBold(para)}
                   </p>
                 ))}
-                {"note" in content && content.note && (
+                {"note" in content && typeof (content as { note?: string }).note === "string" && (
                   <p className="text-stone-500 italic text-[13px] leading-relaxed">
-                    {content.note}
+                    {(content as { note?: string }).note}
                   </p>
                 )}
                 {content.cta && (
@@ -687,16 +680,7 @@ export function FolderWindowContent() {
                                     transition={{ duration: 0.2 }}
                                   >
                                     <div className="relative w-full aspect-video lg:aspect-auto lg:h-[340px] overflow-hidden">
-                                    {openFolder === 0 ? (
-                                      <video
-                                        src="/projects-at-work.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                      />
-                                    ) : openFolder === 1 ? (
+                                    {openFolder === 1 ? (
                                       <video
                                         src="/design-with-ai.mp4"
                                         autoPlay
@@ -705,33 +689,14 @@ export function FolderWindowContent() {
                                         playsInline
                                         className="w-full h-full object-cover"
                                       />
-                                    ) : openFolder === 2 ? (
-                                      <video
-                                        src="/community-impact.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                      />
-                                    ) : openFolder === 4 ? (
-                                      <video
-                                        src="/sketch-to-merch.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                      />
-                                    ) : openFolder === 3 ? (
-                                      <video
-                                        src="/2025-nature.mp4"
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                      />
+                                    ) : openFolder === 0 || openFolder === 2 || openFolder === 3 || openFolder === 4 ? (
+                                      <div className="w-full h-full flex items-center justify-center bg-stone-100">
+                                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#d6d3d1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                                          <circle cx="8.5" cy="8.5" r="1.5" />
+                                          <path d="M21 15l-5-5L5 21" />
+                                        </svg>
+                                      </div>
                                     ) : (
                                       <Image src={folderImages[openFolder]} alt={folderContent[openFolder].title} width={580} height={340} className="w-full h-full object-contain" priority />
                                     )}
@@ -743,9 +708,9 @@ export function FolderWindowContent() {
                                         {renderBold(para)}
                                       </p>
                                     ))}
-                                    {"note" in folderContent[openFolder] && folderContent[openFolder].note && (
+                                    {"note" in folderContent[openFolder] && typeof (folderContent[openFolder] as { note?: string }).note === "string" && (
                                       <p className="text-stone-500 italic text-[13px] leading-relaxed">
-                                        {folderContent[openFolder].note}
+                                        {(folderContent[openFolder] as { note?: string }).note}
                                       </p>
                                     )}
                                     {folderContent[openFolder]?.cta && (() => {
