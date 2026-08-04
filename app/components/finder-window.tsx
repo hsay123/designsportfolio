@@ -548,7 +548,7 @@ export function FolderWindowContent() {
             </div>
             <div className="flex-1 text-center">
               <span className="text-[11px] text-stone-400">
-                ~/yanliu/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}{view !== "root" ? "/dev-projects" : ""}
+                ~/yashh/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}{view !== "root" ? "/dev-projects" : ""}
               </span>
             </div>
             <div className="w-[52px]" />
