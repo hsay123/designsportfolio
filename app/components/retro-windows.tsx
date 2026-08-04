@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // hover state removed — typing auto-starts on load
 
 const terminalLines = [
-  { prompt: "$ whoami", output: "UI/UX Designer & Devloper" },
+  { prompt: "$ whoami", output: "Product Designer & Developer" },
   { prompt: "$ ls interests/", output: "AI/designs/doodles/photography/creativity" },
 ];
 
@@ -62,7 +62,7 @@ export function RetroWindows() {
               <div className="w-[11px] h-[11px] rounded-full bg-[#FEBC2E] border border-[#DEA123]" />
               <div className="w-[11px] h-[11px] rounded-full bg-[#28C840] border border-[#1AAB29]" />
             </div>
-            <span className="text-[11px] text-stone-400 select-none">yan-liu — zsh</span>
+            <span className="text-[11px] text-stone-400 select-none">yashh — zsh</span>
             <div className="w-[52px]" />
           </div>
           <div className="w-full h-[200px] p-3 overflow-hidden font-mono text-[11px] leading-[1.7]">

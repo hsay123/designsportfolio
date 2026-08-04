@@ -42,7 +42,7 @@ figmaDotOrder.forEach((dotIndex, seqIndex) => dotSequenceMap.set(dotIndex, seqIn
 
 /* ── Terminal typing ── */
 const terminalLines = [
-  { prompt: "$ whoami", output: "Senior Product Designer with 7+ years experience" },
+  { prompt: "$ whoami", output: "Product Designer & Developer" },
   { prompt: "$ ls interests/", output: "AI/designs/doodles/photography" },
 ];
 
@@ -98,7 +98,7 @@ function MobileTerminal() {
           <div className="w-[9px] h-[9px] rounded-full bg-[#FEBC2E] border border-[#DEA123]" />
           <div className="w-[9px] h-[9px] rounded-full bg-[#28C840] border border-[#1AAB29]" />
         </div>
-        <span className="text-[10px] text-stone-400 select-none">yan-liu — zsh</span>
+        <span className="text-[10px] text-stone-400 select-none">yashh — zsh</span>
         <div className="w-[40px]" />
       </div>
       <div className="w-full p-3 font-mono text-[11px] leading-[1.7]" style={{ minHeight: "80px" }}>
