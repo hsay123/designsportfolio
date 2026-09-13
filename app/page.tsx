@@ -13,6 +13,7 @@ import { ArrowAnimated, DrawInStars, ScrollRevealText } from "./components/scrol
 import { RippedPaperNote } from "./components/ripped-paper";
 import { PortfolioViewer } from "./components/finder-window";
 import { ScatterBoard } from "./components/scatter-board";
+import { CommunityBoard } from "./components/community-board";
 import { ClickBurst } from "./components/click-burst";
 import { NavHeader } from "./components/nav-header";
 import { CursorHint } from "./components/cursor-hint";

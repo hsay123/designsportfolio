@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Code_Pro, Noto_Sans, Courier_Prime } from "next/font/google";
+import { Source_Code_Pro, Noto_Sans, Courier_Prime, Caveat } from "next/font/google";
 import "./globals.css";
 
 const sourceCodePro = Source_Code_Pro({
@@ -18,6 +18,12 @@ const courierPrime = Courier_Prime({
   variable: "--font-courier-prime",
 });
 
+const caveat = Caveat({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-caveat",
+});
+
 export const metadata: Metadata = {
   title: "Yash Landge — Product Designer & Developer",
   description:
@@ -33,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sourceCodePro.variable} ${notoSans.variable} ${courierPrime.variable}`}>
+    <html lang="en" className={`${sourceCodePro.variable} ${notoSans.variable} ${courierPrime.variable} ${caveat.variable}`}>
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=psychiatry,sunny" />
         <link rel="preload" href="/mac-folder-back-opt.svg" as="image" />

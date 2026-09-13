@@ -634,6 +634,12 @@ export function FolderWindowContent() {
                                 icon={folderIcons[i]}
                                 isSelected={openFolder === i}
                                 onClick={() => {
+                                  if (i === 2) {
+                                    document
+                                      .getElementById("community")
+                                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    return;
+                                  }
                                   if (i === 5) {
                                     setView("dev-projects-list");
                                     setOpenFolder(null);
