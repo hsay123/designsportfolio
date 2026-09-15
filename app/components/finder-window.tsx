@@ -116,12 +116,13 @@ function FolderIcon({ color, title, onClick, isSelected, icon }: {
 
   return (
     <motion.button
+      layout
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="flex flex-col items-center gap-2.5 group cursor-pointer w-[100px]"
       whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.2, layout: { duration: 0.35, ease: "easeOut" } }}
     >
       <div className="relative w-[96px] h-[80px]" style={{
         filter: isSelected ? `drop-shadow(0 2px 8px ${color.bg}66)` : "drop-shadow(0 2px 4px rgba(0,0,0,0.1))",
@@ -406,10 +407,11 @@ function DevFileGrid({ projects, onSelect, onBack }: {
         {projects.map((project, idx) => (
           <motion.button
             key={idx}
+            layout
             onClick={() => onSelect(idx)}
             whileHover={{ scale: 1.02, boxShadow: "4px 6px 16px rgba(0,0,0,0.1)" }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.2, layout: { duration: 0.35, ease: "easeOut" } }}
             className="relative flex overflow-hidden rounded-[30px] cursor-pointer group w-[170px] aspect-square bg-black border-[7px] border-black shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
           >
             <div className="absolute inset-0">
@@ -622,9 +624,10 @@ export function FolderWindowContent() {
                     {/* ── Root view: folder grid + optional side panel ── */}
                     {view === "root" ? (
                       <>
-                        <div
-                          className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
+                        <motion.div
+                          className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0"
                           style={!isMobile ? { width: openFolder !== null ? 420 : "100%" } : undefined}
+                          transition={{ layout: { duration: 0.35, ease: "easeOut" } }}
                         >
                            <div className={`grid grid-cols-3 ${openFolder !== null ? "lg:grid-cols-3" : "lg:grid-cols-6"} gap-x-4 lg:gap-x-10 gap-y-4 lg:gap-y-6 content-start w-fit`}>
                             {siteConfig.sections.map((section, i) => (
@@ -654,7 +657,7 @@ export function FolderWindowContent() {
                               />
                             ))}
                           </div>
-                        </div>
+                        </motion.div>
 
                         {/* Right: Content preview for folders 0-4 */}
                         <AnimatePresence>
@@ -768,16 +771,18 @@ export function FolderWindowContent() {
                 ) : (
                   /* ── Dev Projects view ── */
                   <>
-                    <div
-                      className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0 lg:transition-[width] lg:duration-[350ms] lg:ease-out"
+                    <motion.div
+                      layout
+                      className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0"
                       style={!isMobile ? { width: view === "dev-projects-file" ? 420 : "100%" } : undefined}
+                      transition={{ layout: { duration: 0.35, ease: "easeOut" } }}
                     >
                       <DevFileGrid
                         projects={folderContent[5].projects || []}
                         onSelect={(idx) => { setOpenFile(idx); setView("dev-projects-file"); }}
                         onBack={() => { setOpenFile(null); setView("root"); }}
                       />
-                    </div>
+                    </motion.div>
 
                     <AnimatePresence>
                       {view === "dev-projects-file" && openFile !== null && (
