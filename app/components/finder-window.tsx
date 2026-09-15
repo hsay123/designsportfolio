@@ -8,6 +8,7 @@ import { renderBold } from "@/lib/renderBold";
 import { DesktopWidgets } from "./desktop-widgets";
 import { RecentStatus } from "./recents";
 import { Garden } from "./garden";
+import { CommunityGallery } from "./community-gallery";
 
 const folderColors = [
   { bg: "#8EB4CE", tab: "#7EA4BE", label: "white" },
@@ -519,7 +520,7 @@ function DevFileDetail({ project, onBack }: {
 export function FolderWindowContent() {
   const [openFolder, setOpenFolder] = useState<number | null>(null);
   const [openFile, setOpenFile] = useState<number | null>(null);
-  const [view, setView] = useState<"root" | "dev-projects-list" | "dev-projects-file">("root");
+  const [view, setView] = useState<"root" | "dev-projects-list" | "dev-projects-file" | "community-gallery">("root");
   const [unlocked, setUnlocked] = useState(true);
   const [activeSidebar, setActiveSidebar] = useState("yanliu");
   const [isMobile, setIsMobile] = useState(false);
@@ -548,7 +549,7 @@ export function FolderWindowContent() {
             </div>
             <div className="flex-1 text-center">
               <span className="text-[11px] text-stone-400">
-                ~/yashh/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}{view !== "root" ? "/dev-projects" : ""}
+                ~/yashh/{{ yanliu: "project", desktop: "snapshot", garden: "garden", recents: "achievements" }[activeSidebar] || activeSidebar}{view === "community-gallery" ? "/community-impact" : view !== "root" ? "/dev-projects" : ""}
               </span>
             </div>
             <div className="w-[52px]" />
@@ -635,9 +636,9 @@ export function FolderWindowContent() {
                                 isSelected={openFolder === i}
                                 onClick={() => {
                                   if (i === 2) {
-                                    document
-                                      .getElementById("community")
-                                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    setView("community-gallery");
+                                    setOpenFolder(null);
+                                    setOpenFile(null);
                                     return;
                                   }
                                   if (i === 5) {
@@ -745,6 +746,24 @@ export function FolderWindowContent() {
                         </motion.div>
                       )}
                     </AnimatePresence>
+                  </>
+                ) : view === "community-gallery" ? (
+                  /* ── Community Impact: gallery view ── */
+                  <>
+                    <div className="pt-6 lg:pt-8 pl-4 lg:pl-8 pr-4 lg:pr-6 w-full lg:shrink-0">
+                      <button
+                        onClick={() => setView("root")}
+                        className="flex items-center gap-1 mb-4 text-[13px] text-stone-500 hover:text-stone-700 transition-colors cursor-pointer"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        <span>Projects</span>
+                      </button>
+                      <div className="h-[500px] lg:h-[630px] overflow-y-auto rounded-lg">
+                        <CommunityGallery />
+                      </div>
+                    </div>
                   </>
                 ) : (
                   /* ── Dev Projects view ── */
