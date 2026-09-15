@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 
 const MERGE_SIZE = 100; // flowers per consolidated bloom
@@ -29,6 +29,21 @@ export function Garden({ isMobile = false }: { isMobile?: boolean }) {
   const [showThanks, setShowThanks] = useState(false);
   const [tidy, setTidy] = useState(false); // default: scattered, organic mess
   const [animating, setAnimating] = useState(false);
+  const gardenRef = useRef<HTMLDivElement>(null);
+  const [gardenSize, setGardenSize] = useState({ w: 0, h: 0 });
+
+  // Track the garden's pixel size so percentage positions can be converted into
+  // pixel translate offsets — positioning the flowers via composited transforms
+  // instead of animating left/top (which forces per-frame layout of all 1000).
+  useEffect(() => {
+    const el = gardenRef.current;
+    if (!el) return;
+    const measure = () => setGardenSize({ w: el.clientWidth, h: el.clientHeight });
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -218,6 +233,7 @@ export function Garden({ isMobile = false }: { isMobile?: boolean }) {
       </div>
 
       <div
+        ref={gardenRef}
         className="flex-1 relative mx-3 mb-3 rounded-lg overflow-hidden"
         style={{ background: "#FAF8F5", cursor: "crosshair" }}
         onClick={plantFlower}
@@ -300,11 +316,21 @@ export function Garden({ isMobile = false }: { isMobile?: boolean }) {
           </div>
         )}
 
-        {/* Every individual flower — flies to its bloom when tidied */}
+        {/* Every individual flower — flies to its bloom when tidied.
+            Position is animated with a composited translate3d (never left/top),
+            so all 1000 flights run on the GPU in parallel with zero per-frame
+            layout or paint. */}
         {placed.map(({ flower, inGroup, targetX, targetY }) => {
           const merged = tidy && inGroup;
           const rotation = (((flower.id * 2654435761) >>> 0) % 1000) / 1000 * 16 - 8;
           const stagger = inGroup ? (flower.id % 12) * 18 : 0;
+          // Pixel offset from the flower's scattered home to its bloom, only for
+          // grouped flowers; everything else keeps the exact transform it had.
+          const tx = inGroup ? ((tidy ? targetX - flower.x : 0) / 100) * gardenSize.w : 0;
+          const ty = inGroup ? ((tidy ? targetY - flower.y : 0) / 100) * gardenSize.h : 0;
+          const transform = inGroup
+            ? `translate3d(${tx}px, ${ty}px, 0) translate(-50%, -50%) rotate(${rotation}deg) scale(${merged ? 0 : 1})`
+            : `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`;
           return (
             <img
               key={flower.id}
@@ -313,15 +339,15 @@ export function Garden({ isMobile = false }: { isMobile?: boolean }) {
               className="absolute pointer-events-none"
               draggable={false}
               style={{
-                left: `${merged ? targetX : flower.x}%`,
-                top: `${merged ? targetY : flower.y}%`,
+                left: `${flower.x}%`,
+                top: `${flower.y}%`,
                 width: smallSize,
                 height: smallSize,
                 zIndex: 1,
                 opacity: merged ? 0 : 1,
-                transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(${merged ? 0 : 1})`,
+                transform,
                 transition: inGroup
-                  ? `left ${ANIM_MS}ms cubic-bezier(0.5,0,0.4,1) ${stagger}ms, top ${ANIM_MS}ms cubic-bezier(0.5,0,0.4,1) ${stagger}ms, transform ${ANIM_MS}ms ease ${stagger}ms, opacity ${ANIM_MS * 0.6}ms ease ${stagger + ANIM_MS * 0.4}ms`
+                  ? `transform ${ANIM_MS}ms cubic-bezier(0.5,0,0.4,1) ${stagger}ms, opacity ${ANIM_MS * 0.6}ms ease ${stagger + ANIM_MS * 0.4}ms`
                   : undefined,
                 animation:
                   flower.id === newFlowerId
